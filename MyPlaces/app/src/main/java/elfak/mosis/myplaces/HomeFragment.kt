@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
         return when (item.itemId) {
             R.id.action_my_places_list -> {
                 val navController = this.findNavController()
-                navController.navigateUp()
+                //navController.navigateUp()
                 navController.navigate(R.id.action_HomeFragment_to_ListFragment)
                 true
             }
