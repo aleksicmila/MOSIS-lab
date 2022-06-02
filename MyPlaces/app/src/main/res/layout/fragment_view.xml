@@ -21,8 +21,24 @@
     <TextView
         android:id="@+id/viewmyplace_desc_text"
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Longitude" />
+    <TextView
+        android:id="@+id/viewmyplace_longitude_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Latitude" />
+    <TextView
+        android:id="@+id/viewmyplace_latitude_text"
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
     <Button
         android:id="@+id/viewmyplace_finished_button"
         android:layout_width="fill_parent"

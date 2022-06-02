@@ -12,6 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import elfak.mosis.myplaces.databinding.ActivityMainBinding
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -45,6 +47,8 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.action_HomeFragment_to_EditFragment)
             else if(navController.currentDestination?.id == R.id.ListFragment)
                 navController.navigate(R.id.action_ListFragment_to_EditFragment)
+            else if(navController.currentDestination?.id == R.id.MapFragment)
+                navController.navigate(R.id.action_MapFragment_to_EditFragment)
         }
     }
 
@@ -53,12 +57,12 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_show_map -> Toast.makeText(this, "Show Map!", Toast.LENGTH_SHORT).show()
-            R.id.action_new_place -> {
-                Toast.makeText(this, "New Place!", Toast.LENGTH_SHORT).show()
+            R.id.action_show_map -> {
+                if(navController.currentDestination?.id == R.id.HomeFragment)
+                    navController.navigate(R.id.action_HomeFragment_to_MapFragment)
+                else if(navController.currentDestination?.id == R.id.ListFragment)
+                    navController.navigate(R.id.action_ListFragment_to_MapFragment)
             }
-            R.id.action_my_places_list -> Toast.makeText(this, "My places", Toast.LENGTH_SHORT).show()
-           // R.id.action_about -> Toast.makeText(this, "About!", Toast.LENGTH_SHORT).show()
             R.id.action_about -> {
                 val i: Intent = Intent(this, About::class.java)
                 startActivity(i)

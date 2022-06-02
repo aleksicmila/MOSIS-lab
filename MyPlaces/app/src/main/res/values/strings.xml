@@ -33,6 +33,12 @@
     <string name="edit_fragment_label">Edit My Place</string>
     <string name="add_fragment_label">Add My Place</string>
 
+    <string name="editmyplace_longitude_label">Longitude</string>
+    <string name="editmyplace_latitude_label">Latitude</string>
+    <string name="editmyplace_button_set_coordinates">SET</string>
+
     <string name="viewmyplace_finished_label">Close</string>
+
+    <string name="map_fragment_label">Map</string>
 
 </resources>
