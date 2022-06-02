@@ -83,12 +83,11 @@ class ListFragment : Fragment() {
             myPlacesViewModel.selected = myPlacesViewModel.myPlacesList[info.position]
             this.findNavController().navigate(R.id.action_ListFragment_to_ViewFragment)
         } else if(item.itemId === 2){
-            val bundle: Bundle = Bundle()
-            bundle.putString("label", "Edit My Place")
 
             myPlacesViewModel.selected = myPlacesViewModel.myPlacesList[info.position]
+            this.findNavController().graph.findNode(R.id.EditFragment)?.label=getString(R.string.edit_fragment_label)
+            this.findNavController().navigate(R.id.action_ListFragment_to_EditFragment)
 
-            this.findNavController().navigate(R.id.action_ListFragment_to_EditFragment, bundle)
 
         } else if(item.itemId === 3){
             Toast.makeText(this.context, "Delete item", Toast.LENGTH_SHORT).show()

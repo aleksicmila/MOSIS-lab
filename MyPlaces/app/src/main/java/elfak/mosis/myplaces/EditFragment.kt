@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -26,10 +27,6 @@ class EditFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +38,7 @@ class EditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        this.findNavController().graph.findNode(R.id.EditFragment)?.label=getString(R.string.add_fragment_label)
         val editName: EditText = requireView().findViewById<EditText>(R.id.editmyplace_name_edit)
         val editDesc: EditText = requireView().findViewById<EditText>(R.id.editmyplace_desc_edit)
         if(myPlacesViewModel.selected!=null){
@@ -49,8 +47,9 @@ class EditFragment : Fragment() {
         }
         val addButton: Button = requireView().findViewById<Button>(R.id.editmyplace_finished_button)
         addButton.isEnabled = false
-        if(myPlacesViewModel.selected!=null)
+        if(myPlacesViewModel.selected!=null) {
             addButton.setText(R.string.editmyplace_save_label)
+        }
         editName.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 addButton.isEnabled = (editName.text.length>0)
@@ -71,11 +70,11 @@ class EditFragment : Fragment() {
             }
             else
                 myPlacesViewModel.addPlace(MyPlace(name, desc))
-            findNavController().navigate(R.id.action_EditFragment_to_ListFragment)
+            findNavController().popBackStack()
         }
         val cancelButton: Button = requireView().findViewById<Button>(R.id.editmyplace_cancel_button)
         cancelButton.setOnClickListener(){
-            findNavController().navigate(R.id.action_EditFragment_to_ListFragment)
+            findNavController().popBackStack()
         }
     }
 
@@ -83,21 +82,4 @@ class EditFragment : Fragment() {
         super.onDestroyView()
         myPlacesViewModel.selected = null
     }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        val item = menu.findItem(R.id.action_new_place)
-        item.isVisible = false
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.action_my_places_list -> {
-                this.findNavController().navigate(R.id.action_EditFragment_to_ListFragment)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
 }

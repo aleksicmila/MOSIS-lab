@@ -30,8 +30,8 @@
     <string name="editmyplace_cancel_label">CANCEL</string>
     <string name="editmyplace_save_label">SAVE</string>
 
-    <string name="edit_fragment_label">Add My Place</string>
-
+    <string name="edit_fragment_label">Edit My Place</string>
+    <string name="add_fragment_label">Add My Place</string>
 
     <string name="viewmyplace_finished_label">Close</string>
 
